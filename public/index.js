@@ -742,7 +742,7 @@ eval("/**\n * Copyright (c) 2014-present, Facebook, Inc.\n *\n * This source cod
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nvar _react = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _reactRouterDom = __webpack_require__(/*! react-router-dom */ \"./node_modules/react-router-dom/es/index.js\");\n\nvar _Home = __webpack_require__(/*! ./container/Home */ \"./src/container/Home/index.js\");\n\nvar _Home2 = _interopRequireDefault(_Home);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nexports.default = _react2.default.createElement(\n    'div',\n    null,\n    _react2.default.createElement(_reactRouterDom.Route, { path: '/', exact: true, component: _Home2.default })\n);\n// 做同构的同时  我们的路由要在服务器端跑一次，在客户端也跑一遍 用户体验 首先我们让路由在客户端跑\n\n//# sourceURL=webpack:///./src/Routes.js?");
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nvar _react = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _reactRouterDom = __webpack_require__(/*! react-router-dom */ \"./node_modules/react-router-dom/es/index.js\");\n\nvar _Home = __webpack_require__(/*! ./container/Home */ \"./src/container/Home/index.js\");\n\nvar _Home2 = _interopRequireDefault(_Home);\n\nvar _Index = __webpack_require__(/*! ./container/Login/Index */ \"./src/container/Login/Index.js\");\n\nvar _Index2 = _interopRequireDefault(_Index);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nexports.default = _react2.default.createElement(\n    'div',\n    null,\n    _react2.default.createElement(_reactRouterDom.Route, { path: '/', exact: true, component: _Home2.default }),\n    _react2.default.createElement(_reactRouterDom.Route, { path: '/login', exact: true, component: _Index2.default })\n);\n// 做同构的同时  我们的路由要在服务器端跑一次，在客户端也跑一遍 用户体验 首先我们让路由在客户端跑\n\n//# sourceURL=webpack:///./src/Routes.js?");
 
 /***/ }),
 
@@ -767,6 +767,18 @@ eval("\n\nvar _react = __webpack_require__(/*! react */ \"./node_modules/react/i
 
 "use strict";
 eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nvar _react = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n\nvar _react2 = _interopRequireDefault(_react);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\n// 同构:一套react代码  在服务器执行一次 在客户端再执行一次 解决点击事件无效的问题\nvar Home = function Home() {\n    return _react2.default.createElement(\n        'div',\n        null,\n        _react2.default.createElement(\n            'div',\n            null,\n            'zl'\n        ),\n        _react2.default.createElement(\n            'button',\n            { onClick: function onClick() {\n                    return alert('click');\n                } },\n            'click'\n        )\n    );\n};\nexports.default = Home;\n\n//# sourceURL=webpack:///./src/container/Home/index.js?");
+
+/***/ }),
+
+/***/ "./src/container/Login/Index.js":
+/*!**************************************!*\
+  !*** ./src/container/Login/Index.js ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nvar _react = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n\nvar _react2 = _interopRequireDefault(_react);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar Login = function Login() {\n    return _react2.default.createElement(\n        'div',\n        null,\n        _react2.default.createElement(\n            'div',\n            null,\n            'Login'\n        )\n    );\n};\nexports.default = Login;\n\n//# sourceURL=webpack:///./src/container/Login/Index.js?");
 
 /***/ })
 
