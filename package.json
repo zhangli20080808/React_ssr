@@ -4,14 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon ./build/bundle.js",
-    "build": "webpack --config webpack.server.js"
+    "start": "nodemon --watch build --exec node \"./build/bundle.js\"",
+    "build": "webpack --config webpack.server.js --watch"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "babel-core": "^6.26.3",
-    "babel-loader": "^7.0.0",
+    "babel-loader": "^7.1.5",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
