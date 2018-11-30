@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev":"npm-run-all --parallel dev:**",
+    "dev": "npm-run-all --parallel dev:**",
     "dev:start": "nodemon --watch build --exec node \"./build/bundle.js\"",
     "dev:build:server": "webpack --config webpack.server.js --watch",
     "dev:build:client": "webpack --config webpack.client.js --watch"
@@ -22,6 +22,7 @@
     "react-dom": "^16.6.3",
     "webpack": "^4.26.1",
     "webpack-cli": "^3.1.2",
+    "webpack-merge": "^4.1.4",
     "webpack-node-externals": "^1.7.2"
   }
 }
