@@ -758,6 +758,18 @@ eval("\n\nvar _react = __webpack_require__(/*! react */ \"./node_modules/react/i
 
 /***/ }),
 
+/***/ "./src/components/Header.js":
+/*!**********************************!*\
+  !*** ./src/components/Header.js ***!
+  \**********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nvar _react = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _reactRouterDom = __webpack_require__(/*! react-router-dom */ \"./node_modules/react-router-dom/es/index.js\");\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar Header = function Header() {\n    return _react2.default.createElement(\n        'div',\n        null,\n        _react2.default.createElement(\n            _reactRouterDom.Link,\n            { to: '/' },\n            'home'\n        ),\n        _react2.default.createElement('br', null),\n        _react2.default.createElement(\n            _reactRouterDom.Link,\n            { to: '/login' },\n            'login'\n        )\n    );\n};\n// 同构:一套react代码  在服务器执行一次 在客户端再执行一次 解决点击事件无效的问题\nexports.default = Header;\n\n//# sourceURL=webpack:///./src/components/Header.js?");
+
+/***/ }),
+
 /***/ "./src/container/Home/index.js":
 /*!*************************************!*\
   !*** ./src/container/Home/index.js ***!
@@ -766,7 +778,7 @@ eval("\n\nvar _react = __webpack_require__(/*! react */ \"./node_modules/react/i
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nvar _react = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n\nvar _react2 = _interopRequireDefault(_react);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\n// 同构:一套react代码  在服务器执行一次 在客户端再执行一次 解决点击事件无效的问题\nvar Home = function Home() {\n    return _react2.default.createElement(\n        'div',\n        null,\n        _react2.default.createElement(\n            'div',\n            null,\n            'zl'\n        ),\n        _react2.default.createElement(\n            'button',\n            { onClick: function onClick() {\n                    return alert('click');\n                } },\n            'click'\n        )\n    );\n};\nexports.default = Home;\n\n//# sourceURL=webpack:///./src/container/Home/index.js?");
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nvar _react = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _Header = __webpack_require__(/*! ../../components/Header */ \"./src/components/Header.js\");\n\nvar _Header2 = _interopRequireDefault(_Header);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar Home = function Home() {\n    return _react2.default.createElement(\n        'div',\n        null,\n        _react2.default.createElement(_Header2.default, null),\n        _react2.default.createElement(\n            'div',\n            null,\n            'zl'\n        ),\n        _react2.default.createElement(\n            'button',\n            { onClick: function onClick() {\n                    return alert('click');\n                } },\n            'click'\n        )\n    );\n};\n// 同构:一套react代码  在服务器执行一次 在客户端再执行一次 解决点击事件无效的问题\nexports.default = Home;\n\n//# sourceURL=webpack:///./src/container/Home/index.js?");
 
 /***/ }),
 
@@ -778,7 +790,7 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nvar _react = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n\nvar _react2 = _interopRequireDefault(_react);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar Login = function Login() {\n    return _react2.default.createElement(\n        'div',\n        null,\n        _react2.default.createElement(\n            'div',\n            null,\n            'Login'\n        )\n    );\n};\nexports.default = Login;\n\n//# sourceURL=webpack:///./src/container/Login/Index.js?");
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\n\nvar _react = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _Header = __webpack_require__(/*! ../../components/Header */ \"./src/components/Header.js\");\n\nvar _Header2 = _interopRequireDefault(_Header);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar Login = function Login() {\n    return _react2.default.createElement(\n        'div',\n        null,\n        _react2.default.createElement(_Header2.default, null),\n        _react2.default.createElement(\n            'div',\n            null,\n            'Login'\n        )\n    );\n};\nexports.default = Login;\n\n//# sourceURL=webpack:///./src/container/Login/Index.js?");
 
 /***/ })
 
