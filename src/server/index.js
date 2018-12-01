@@ -34,4 +34,20 @@ redux react-redux react-thunk
 构架redux代码结构 -->HOME
 我们从reducer写起 负责初始化创建一些数据  然后我们去全局store的index.js 这个地方需要对rendce做一个组合
 只要涉及派发一个action 我们应该action的创建放在store目录的actions.js
+
+
+1.服务器街搜到请求 store是空的 接着服务器回去匹配路由 看是哪个组件 我知道显示的是这个组件  但是要注意服务端是不会渲染 componentDidmount的
+所以他的reduce一直是个空 不会去拿远程服务器的数据
+2.服务器端不会执行 服务端是不会渲染 componentDidmount的 所以列表内容获取不到
+
+我们的问题是什么呢？就是让服务器也能执行 componentDidmount去获取到数据
+ first : loadData方法
+
+ 
+ second : 路由的重构
+
+3.客户端代码运行 这个时候store已然是空的
+4.客户端执行componentDidMount 列报表数据被获取
+5.store中的列表数据被更新
+6.客户端渲染出store中list数据对应的列表内容
 */

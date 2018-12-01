@@ -5,11 +5,15 @@ import { connect } from 'react-redux'
 import { getHomeList } from './store/actions'
 
 class Home extends Component {
+    getList(){
+        const {list} = this.props
+        return list.map(v=><div key={v.id}>{v.title}</div>)
+    }
     render() {
         return (
             <div>
                 <Header />
-                <div dangerouslySetInnerHTML={{__html: this.props.list}}/>
+                <div>{this.getList()}</div>
             </div>
         )
     }
