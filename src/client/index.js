@@ -2,17 +2,12 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter } from 'react-router-dom'
 import Routes from '../Routes'
-import { createStore ,applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
-import thunk from 'redux-thunk'
+import getStore from '../store'
 
-const reducer = (state = { name: 'dell' }, action) => {
-    return state
-}
-const store = createStore(reducer,applyMiddleware(thunk))
 const App = () => {
     return (
-        <Provider store={store}>
+        <Provider store={getStore()}>
             <BrowserRouter>
                 {Routes}
             </BrowserRouter>
