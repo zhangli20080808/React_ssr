@@ -29,5 +29,9 @@ nodeServer--拼装页面 浏览器--运行js 而底层 关于数据查询 数据
 如果我们在服务端使用redux的话  那我们在客户端也需要使用redux
 
 创建一个store 并传递给路由下的每一个组件
-redux react-redux react-thunk 
+redux react-redux react-thunk
+
+构架redux代码结构 -->HOME
+我们从reducer写起 负责初始化创建一些数据  然后我们去全局store的index.js 这个地方需要对rendce做一个组合
+只要涉及派发一个action 我们应该action的创建放在store目录的actions.js
 */
