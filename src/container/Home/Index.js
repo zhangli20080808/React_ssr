@@ -9,8 +9,7 @@ class Home extends Component {
         return (
             <div>
                 <Header />
-                <div>this sis {this.props.name}</div>
-                <button onClick={() => alert('click')}>click</button>
+                <div dangerouslySetInnerHTML={{__html: this.props.list}}/>
             </div>
         )
     }
@@ -19,7 +18,7 @@ class Home extends Component {
     }
 }
 const mapStateToProps = state => ({
-    name: state.home.name
+    list: state.home.newsList
 })
 const mapDispatchToProps = dispatch => ({
     getHomeList() {
