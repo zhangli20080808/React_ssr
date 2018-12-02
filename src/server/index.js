@@ -1,13 +1,20 @@
 import express from 'express'
+import proxy from 'express-http-proxy'
 import { render } from './util'
-import {getStore} from '../store'
+import { getStore } from '../store'
 import routes from '../Routes'
 import { matchRoutes } from 'react-router-config'
 const app = express();
 
 app.use(express.static('public'))
+app.use('/api', proxy('http://47.95.113.63', {
+    proxyReqPathResolver: function (req) {
+        console.log(req.url)
+        return '/ssr/api' + req.url
+    }
+}))
 app.get('*', function (req, res) {
-        // 如果在这里能拿到异步数据 并填充到store之中
+    // 如果在这里能拿到异步数据 并填充到store之中
     // store里面填充什么我们不知道 我们需要结合用户的的请求地址和当前的路由做判断
     // 如果用户访问 / 我们就拿 home的异步数据
     // 如果用户访问 /login 我们就拿 login的异步数据
@@ -15,20 +22,20 @@ app.get('*', function (req, res) {
     const store = getStore()
     // 根据路由的路径往store里面加数据
 
-    const matchedRoutes = matchRoutes(routes, req.path)
+    // const matchedRoutes = matchRoutes(routes, req.path)
 
-    //让 matchRoutes里面所有的组件，对应的loadData方法执行一次 
-    const promises = []
-    matchedRoutes.forEach(item => {
-        // 如果进入的这些组件有loadData，就把提前加载数据的方法 对应的promise
-        if (item.route.loadData) {
-            promises.push(item.route.loadData(store))
-        }
-    })
-    Promise.all(promises).then(() => {
-       res.send(render(store,routes,req)) 
+    // //让 matchRoutes里面所有的组件，对应的loadData方法执行一次 
+    // const promises = []
+    // matchedRoutes.forEach(item => {
+    //     // 如果进入的这些组件有loadData，就把提前加载数据的方法 对应的promise
+    //     if (item.route.loadData) {
+    //         promises.push(item.route.loadData(store))
+    //     }
+    // })
+    // Promise.all(promises).then(() => {
+        res.send(render(store, routes, req))
 
-    })
+    // })
 })
 var server = app.listen('3000')
 
@@ -81,4 +88,8 @@ redux react-redux react-thunk
 
 我们在创建客户端的时候 我用服务端给我的数据
 拿到服务器返给我我们的state的状态  window.context.state 默认值
+
+使用proxy代理，让中间层承担数据获取职责 中间层的好处 容易调错 客户端-nodeServer nodeServer-apiServer 让
+nodeServer变成一个代理服务器 express-http-proxy
+
 */

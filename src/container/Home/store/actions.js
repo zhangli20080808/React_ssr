@@ -8,7 +8,7 @@ const changeList = (list) => ({
 // 由action creator创建出的一个对象 
 export const getHomeList = () => {
     return (dispatch) => {
-       return axios.get('http://47.95.113.63/ssr/api/news.json?secret=M5s2sPneDE')
+       return axios.get('/api/news.json?secret=M5s2sPneDE')
             .then((res) => {
                 const list = res.data.data
                 dispatch(changeList(list))
