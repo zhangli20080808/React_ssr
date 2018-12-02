@@ -1,6 +1,6 @@
 import express from 'express'
 import { render } from './util'
-import getStore from '../store'
+import {getStore} from '../store'
 import routes from '../Routes'
 import { matchRoutes } from 'react-router-config'
 const app = express();
@@ -74,4 +74,11 @@ redux react-redux react-thunk
 4.客户端执行componentDidMount 列报表数据被获取
 5.store中的列表数据被更新
 6.客户端渲染出store中list数据对应的列表内容
+
+脱水 注水  服务端把页面返回之后客户端在做二次渲染的时候，二次渲染的一开始，客户端的store是空的，所以页面开始会白屏
+会调用 componentDidmount去获取到数据 成功之后页面才会显示
+问题？服务端渲染store的时候和客户端渲染store的时候数据是不同的 如何做到统一呢
+
+我们在创建客户端的时候 我用服务端给我的数据
+拿到服务器返给我我们的state的状态  window.context.state 默认值
 */

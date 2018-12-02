@@ -5,9 +5,9 @@ import { connect } from 'react-redux'
 import { getHomeList } from './store/actions'
 
 class Home extends Component {
-    getList(){
-        const {list} = this.props
-        return list.map(v=><div key={v.id}>{v.title}</div>)
+    getList() {
+        const { list } = this.props
+        return list.map(v => <div key={v.id}>{v.title}</div>)
     }
     render() {
         return (
@@ -19,13 +19,15 @@ class Home extends Component {
     }
     componentDidMount() {
         // console.log('1')
-        this.props.getHomeList()
+        if (!this.props.list.length) {
+            this.props.getHomeList()
+        }
     }
 }
 
-Home.loadData = (store)=>{
+Home.loadData = (store) => {
     // 这个函数负责在服务端渲染之前，把这个路由需要的数据提前加载好
-   return store.dispatch(getHomeList())
+    return store.dispatch(getHomeList())
 }
 const mapStateToProps = state => ({
     list: state.home.newsList
