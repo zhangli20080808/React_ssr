@@ -22,20 +22,20 @@ app.get('*', function (req, res) {
     const store = getStore()
     // 根据路由的路径往store里面加数据
 
-    // const matchedRoutes = matchRoutes(routes, req.path)
+    const matchedRoutes = matchRoutes(routes, req.path)
 
     // //让 matchRoutes里面所有的组件，对应的loadData方法执行一次 
-    // const promises = []
-    // matchedRoutes.forEach(item => {
-    //     // 如果进入的这些组件有loadData，就把提前加载数据的方法 对应的promise
-    //     if (item.route.loadData) {
-    //         promises.push(item.route.loadData(store))
-    //     }
-    // })
-    // Promise.all(promises).then(() => {
+    const promises = []
+    matchedRoutes.forEach(item => {
+        // 如果进入的这些组件有loadData，就把提前加载数据的方法 对应的promise
+        if (item.route.loadData) {
+            promises.push(item.route.loadData(store))
+        }
+    })
+    Promise.all(promises).then(() => {
         res.send(render(store, routes, req))
 
-    // })
+    })
 })
 var server = app.listen('3000')
 
@@ -91,5 +91,7 @@ redux react-redux react-thunk
 
 使用proxy代理，让中间层承担数据获取职责 中间层的好处 容易调错 客户端-nodeServer nodeServer-apiServer 让
 nodeServer变成一个代理服务器 express-http-proxy
-
+根据环境对url做了一个区分
+axios 两个重要概念  instance/interceptors
+对axios请求的前缀做一些特殊的配置
 */
