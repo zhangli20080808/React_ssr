@@ -1,10 +1,34 @@
 import express from 'express'
 import { render } from './util'
+import getStore from '../store'
+import routes from '../Routes'
+import { matchRoutes } from 'react-router-config'
 const app = express();
 
 app.use(express.static('public'))
 app.get('*', function (req, res) {
-    res.send(render(req))
+        // 如果在这里能拿到异步数据 并填充到store之中
+    // store里面填充什么我们不知道 我们需要结合用户的的请求地址和当前的路由做判断
+    // 如果用户访问 / 我们就拿 home的异步数据
+    // 如果用户访问 /login 我们就拿 login的异步数据
+
+    const store = getStore()
+    // 根据路由的路径往store里面加数据
+
+    const matchedRoutes = matchRoutes(routes, req.path)
+
+    //让 matchRoutes里面所有的组件，对应的loadData方法执行一次 
+    const promises = []
+    matchedRoutes.forEach(item => {
+        // 如果进入的这些组件有loadData，就把提前加载数据的方法 对应的promise
+        if (item.route.loadData) {
+            promises.push(item.route.loadData(store))
+        }
+    })
+    Promise.all(promises).then(() => {
+       res.send(render(store,routes,req)) 
+
+    })
 })
 var server = app.listen('3000')
 
@@ -43,7 +67,7 @@ redux react-redux react-thunk
 我们的问题是什么呢？就是让服务器也能执行 componentDidmount去获取到数据
  first : loadData方法
 
- 
+
  second : 路由的重构
 
 3.客户端代码运行 这个时候store已然是空的
