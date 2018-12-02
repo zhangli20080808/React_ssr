@@ -3,6 +3,7 @@ import { renderToString } from 'react-dom/server'
 import { StaticRouter, Route } from 'react-router-dom'
 import routes from '../Routes'
 import { Provider } from 'react-redux'
+import { renderRoutes } from 'react-router-config'
 
 export const render = (store,routes,req) => {
     const content = renderToString((
@@ -12,9 +13,7 @@ export const render = (store,routes,req) => {
             <StaticRouter context={{}} location={req.path}>
                 {/* 我们把route中的每一项展开作为他的属性就生成了路由 */}
                 <div>
-                    {routes.map(route => (
-                        <Route {...route} />
-                    ))}
+                    {renderRoutes(routes)}
                 </div>
             </StaticRouter>
         </Provider>
