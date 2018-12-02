@@ -94,4 +94,7 @@ nodeServer变成一个代理服务器 express-http-proxy
 根据环境对url做了一个区分
 axios 两个重要概念  instance/interceptors
 对axios请求的前缀做一些特殊的配置
+
+redux-thunk中的withExtraArgument
+withExtraArgument 关于server的判断我们加到store里面去
 */

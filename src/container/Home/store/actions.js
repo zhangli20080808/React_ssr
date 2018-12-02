@@ -1,21 +1,16 @@
-import axios from 'axios'
 import { CHANG_LIST } from './constants'
-import clientAxios from '../../../client/request'
-import serverAxios from '../../../server/requset'
-
 
 const changeList = (list) => ({
     type: CHANG_LIST,
     list
 })
 // 由action creator创建出的一个对象 
-export const getHomeList = (server) => {
+export const getHomeList = () => {
     // 由于我们的服务器端也会运行一次
     // 浏览器运行 /api/news.json = localhost:3000/api/news.json
     // 服务端运行 /api/news.json = 服务器根目录下的/api/news.json 没有这个目录啊
-    const request = server ? serverAxios: clientAxios
-    return (dispatch) => {
-       return request.get('/api/news.json?secret=M5s2sPneDE')
+    return (dispatch,getState,axionsInstance) => {
+       return axionsInstance.get('/api/news.json?secret=M5s2sPneDE')
             .then((res) => {
                 const list = res.data.data
                 dispatch(changeList(list))
