@@ -8,6 +8,7 @@ import Login from './container/Login/Index'
 export default [{
     path: '/',
     component: App,
+    loadData: App.loadData,
     routes: [
         {
             path: '/',

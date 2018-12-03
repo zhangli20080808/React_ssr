@@ -16,6 +16,6 @@ const App = () => {
                 </div>
             </BrowserRouter>
         </Provider>
-    )
+    ) 
 }
 ReactDOM.hydrate(<App />, document.getElementById('root'))
