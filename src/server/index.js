@@ -44,7 +44,7 @@ app.get('*', function (req, res) {
 	})
 });
 
-var server = app.listen(3000);
+var server = app.listen(3003);
 
 /*
 虚拟dom 是真是DOM的一个JavaScript的对象映射 因为虚拟dom是一个js对象 所以在客户端渲染的时候，把一个虚拟dom
