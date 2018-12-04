@@ -1,45 +1,50 @@
-import express from 'express'
-import proxy from 'express-http-proxy'
-import { render } from './util'
-import { getStore } from '../store'
-import routes from '../Routes'
+import express from 'express';
+import proxy from 'express-http-proxy';
 import { matchRoutes } from 'react-router-config'
-const app = express();
+import { render } from './utils';
+import { getStore } from '../store';
+import routes from '../Routes';
 
-app.use(express.static('public'))
+const app = express();
+app.use(express.static('public'));
+
+// /api/news.json
+// req.url = news.json
+// proxyReqPathResolver: /ssr/api/news.json
+// http://47.95.113.63 + proxyReqPathResolver()
+// http://47.95.113.63/ssr/api/news.json
+
 app.use('/api', proxy('http://47.95.113.63', {
-    proxyReqPathResolver: function (req) {
-        console.log(req.url) 
-        return '/ssr/api' + req.url
-    }
-}))
+  proxyReqPathResolver: function (req) {
+    return '/ssr/api' + req.url;
+  }
+}));
+
 app.get('*', function (req, res) {
-    // 如果在这里能拿到异步数据 并填充到store之中
+
+	 // 如果在这里能拿到异步数据 并填充到store之中
     // store里面填充什么我们不知道 我们需要结合用户的的请求地址和当前的路由做判断
     // 如果用户访问 / 我们就拿 home的异步数据
-    // 如果用户访问 /login 我们就拿 login的异步数据
+		// 如果用户访问 /login 我们就拿 login的异步数据
+		
+	const store = getStore(req);
+	// 根据路由的路径，来往store里面加数据
+	const matchedRoutes = matchRoutes(routes, req.path);
+	// 让matchRoutes里面所有的组件，对应的loadData方法执行一次
+	const promises = [];
+	matchedRoutes.forEach(item => {
+		        // 如果进入的这些组件有loadData，就把提前加载数据的方法 对应的promise
 
-    const store = getStore()
-    // 根据路由的路径往store里面加数据
+		if (item.route.loadData) {
+			promises.push(item.route.loadData(store))
+		}
+	})
+	Promise.all(promises).then(() => {
+		res.send(render(store, routes, req));
+	})
+});
 
-    const matchedRoutes = matchRoutes(routes, req.path)
-
-    // //让 matchRoutes里面所有的组件，对应的loadData方法执行一次 
-    const promises = []
-    matchedRoutes.forEach(item => {
-        // 如果进入的这些组件有loadData，就把提前加载数据的方法 对应的promise
-        if (item.route.loadData) {
-            promises.push(item.route.loadData(store))
-        }
-    })
-    Promise.all(promises).then(() => {
-        res.send(render(store, routes, req))
-
-    })
-})
-var server = app.listen('3000')
-
-
+var server = app.listen(3000);
 
 /*
 虚拟dom 是真是DOM的一个JavaScript的对象映射 因为虚拟dom是一个js对象 所以在客户端渲染的时候，把一个虚拟dom
@@ -99,4 +104,14 @@ redux-thunk中的withExtraArgument
 withExtraArgument 关于server的判断我们加到store里面去
 比对文件  beyond compare
 
+1.刚进入页面，处于非登录状态
+2.用户点击登录按钮，进行登录操作
+ （1).浏览器发送请求给node服务器
+ （2).转发给api服务器，进行登录
+ （3).api服务器生成cookie
+ （4).浏览器上存了cookie，登录成功
+3.当用户重新刷新页面的时候
+ （1).浏览器去请求html页面
+ （2).nodejs服务器进行服务端渲染
+ （3).进行服务端渲染，首先要去api服务器获取数据
 */

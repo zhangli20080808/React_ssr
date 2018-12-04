@@ -1,28 +1,27 @@
-import React from 'react'
-import { Route } from 'react-router-dom'
+import React from 'react';
+import { Route } from 'react-router-dom';
+import App from './App';
+import Home from './containers/Home';
+import Login from './containers/Login';
 
-import Home from './container/Home'
-import App from './App'
-import Login from './container/Login/Index'
-
+// 当我加载显示HOME组件之前，我希望调用Home.loadData方法，提前获取到必要的异步数据
+// 然后再做服务器端渲染，把页面返回给用户
 export default [{
-    path: '/',
-    component: App,
-    loadData: App.loadData,
-    routes: [
-        {
-            path: '/',
-            component: Home,
-            exact: true,
-            loadData: Home.loadData,
-            key: 'home'
-        },
-        {
-            path: '/login',
-            component: Login,
-            exact: true,
-            key: 'login'
-        }
-    ]
-}]
-// 做同构的同时  我们的路由要在服务器端跑一次，在客户端也跑一遍 用户体验 首先我们让路由在客户端跑
+  path: '/',
+  component: App,
+  loadData: App.loadData,
+  routes: [
+    { 
+      path: '/',
+      component: Home,
+      exact: true,
+      loadData: Home.loadData,
+      key: 'home'
+    }, { 
+      path: '/login',
+      component: Login,
+      exact: true,
+      key: 'login'
+    }
+  ]
+}];

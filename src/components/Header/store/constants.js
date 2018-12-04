@@ -1,1 +1,1 @@
-export const CHANG_LOGIN = 'CHANG_LOGIN'
+export const CHANGE_LOGIN = 'HEADER/CHANGER_LOGIN';
