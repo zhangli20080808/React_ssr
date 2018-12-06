@@ -10,7 +10,7 @@ export const getHomeList = () => {
     // 浏览器运行 /api/news.json = localhost:3000/api/news.json
     // 服务端运行 /api/news.json = 服务器根目录下的/api/news.json 没有这个目录啊
 	return (dispatch, getState, axiosInstance) => {
-		return axiosInstance.get('/api/news.json?secret=M5s2sPneDE')
+		return axiosInstance.get('/api/news.json')
 			.then((res) => {
 				const list = res.data.data;
 				dispatch(changeList(list))

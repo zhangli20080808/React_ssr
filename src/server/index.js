@@ -15,32 +15,42 @@ app.use(express.static('public'));
 // http://47.95.113.63/ssr/api/news.json
 
 app.use('/api', proxy('http://47.95.113.63', {
-  proxyReqPathResolver: function (req) {
-    return '/ssr/api' + req.url;
-  }
+	proxyReqPathResolver: function (req) {
+		return '/ssr/api' + req.url;
+	}
 }));
 
 app.get('*', function (req, res) {
 
-	 // 如果在这里能拿到异步数据 并填充到store之中
-    // store里面填充什么我们不知道 我们需要结合用户的的请求地址和当前的路由做判断
-    // 如果用户访问 / 我们就拿 home的异步数据
-		// 如果用户访问 /login 我们就拿 login的异步数据
-		
+	// 如果在这里能拿到异步数据 并填充到store之中
+	// store里面填充什么我们不知道 我们需要结合用户的的请求地址和当前的路由做判断
+	// 如果用户访问 / 我们就拿 home的异步数据
+	// 如果用户访问 /login 我们就拿 login的异步数据
+
 	const store = getStore(req);
 	// 根据路由的路径，来往store里面加数据
 	const matchedRoutes = matchRoutes(routes, req.path);
 	// 让matchRoutes里面所有的组件，对应的loadData方法执行一次
 	const promises = [];
 	matchedRoutes.forEach(item => {
-		        // 如果进入的这些组件有loadData，就把提前加载数据的方法 对应的promise
+		// 如果进入的这些组件有loadData，就把提前加载数据的方法 对应的promise
 
 		if (item.route.loadData) {
 			promises.push(item.route.loadData(store))
 		}
 	})
 	Promise.all(promises).then(() => {
-		res.send(render(store, routes, req));
+		const context = {}
+		const html = render(store, routes, req, context)
+		console.log(context)
+		// 在这判断你是已经存在的页面还是404里面的页面
+		if (context.notFind) {
+			// 在我们返回页面的状态码之前就改变这个状态码
+			res.status(404)
+			res.send(html);
+		} else {
+			res.send(html);
+		}
 	})
 });
 

@@ -7,7 +7,7 @@ const changeLogin = (value) => ({
 
 export const login = () => {
 	return (dispatch, getState, axiosInstance) => {
-		return axiosInstance.get('/api/login.json?secret=M5s2sPneDE')
+		return axiosInstance.get('/api/login.json')
 			.then((res) => {
 				dispatch(changeLogin(true))
 			});
@@ -16,7 +16,7 @@ export const login = () => {
 
 export const logout = () => {
 	return (dispatch, getState, axiosInstance) => {
-		return axiosInstance.get('/api/logout.json?secret=M5s2sPneDE')
+		return axiosInstance.get('/api/logout.json')
 			.then((res) => {
 				dispatch(changeLogin(false))
 			});
@@ -28,7 +28,7 @@ export const getHeaderInfo = () => {
     // 浏览器运行 /api/news.json = localhost:3000/api/news.json
     // 服务端运行 /api/news.json = 服务器根目录下的/api/news.json 没有这个目录啊
 	return (dispatch, getState, axiosInstance) => {
-		return axiosInstance.get('/api/isLogin.json?secret=M5s2sPneDE')
+		return axiosInstance.get('/api/isLogin.json')
 			.then((res) => {
 				dispatch(changeLogin(res.data.data.login))
 			});
