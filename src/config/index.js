@@ -1,3 +1,3 @@
 export default {
-    secret: 'M5s2sPneDE'
+    secret: 'PP87ANTIPIRATE'
 }

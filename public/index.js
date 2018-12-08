@@ -1546,7 +1546,7 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n\tvalue: true\n});\n
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\nexports.default = {\n    secret: 'M5s2sPneDE'\n};\n\n//# sourceURL=webpack:///./src/config/index.js?");
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n    value: true\n});\nexports.default = {\n    secret: 'PP87ANTIPIRATE'\n};\n\n//# sourceURL=webpack:///./src/config/index.js?");
 
 /***/ }),
 

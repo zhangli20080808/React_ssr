@@ -4,6 +4,8 @@ import { matchRoutes } from 'react-router-config'
 import { render } from './utils';
 import { getStore } from '../store';
 import routes from '../Routes';
+import { rejects } from 'assert';
+import { resolve } from 'path';
 
 const app = express();
 app.use(express.static('public'));
@@ -36,21 +38,28 @@ app.get('*', function (req, res) {
 		// 如果进入的这些组件有loadData，就把提前加载数据的方法 对应的promise
 
 		if (item.route.loadData) {
-			promises.push(item.route.loadData(store))
+			const promise = new Promise((reslove, reject) => {
+				item.route.loadData(store).then(reslove).catch(reslove)
+			})
+			promises.push(promise)
 		}
 	})
 	Promise.all(promises).then(() => {
+		// reatc-router-config定义路由的时候 如果发现了我们组件出现了redirect  他会自动帮我们操作一下这个context
 		const context = {}
 		const html = render(store, routes, req, context)
-		console.log(context)
 		// 在这判断你是已经存在的页面还是404里面的页面
-		if (context.notFind) {
+		if (context.action === 'REPLACE') {
+			res.redirect(301, context.url)
+		} else if (context.notFind) {
 			// 在我们返回页面的状态码之前就改变这个状态码
 			res.status(404)
 			res.send(html);
 		} else {
 			res.send(html);
 		}
+	}).catch(() => {
+		res.send('sorry,requset error')
 	})
 });
 
@@ -124,4 +133,6 @@ withExtraArgument 关于server的判断我们加到store里面去
  （1).浏览器去请求html页面
  （2).nodejs服务器进行服务端渲染
  （3).进行服务端渲染，首先要去api服务器获取数据
+
+ 一个网站  文字 多媒体(图片) 链接  搜索引擎判断一个网站到底如何的时候 还是看这三个方面
 */
