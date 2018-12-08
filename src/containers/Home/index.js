@@ -13,7 +13,7 @@ class Home extends Component {
 		// 	console.log(styles._getCss());
 		// }
 		if(this.props.staticContext){
-			this.props.staticContext.css = styles._getCss()
+			this.props.staticContext.css.push(styles._getCss()) 
 		}
 	}
 	getList() {

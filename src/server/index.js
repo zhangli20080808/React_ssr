@@ -46,7 +46,7 @@ app.get('*', function (req, res) {
 	})
 	Promise.all(promises).then(() => {
 		// reatc-router-config定义路由的时候 如果发现了我们组件出现了redirect  他会自动帮我们操作一下这个context
-		const context = {}
+		const context = {css:[]}
 		const html = render(store, routes, req, context)
 		// 在这判断你是已经存在的页面还是404里面的页面
 		// console.log(context.css)
