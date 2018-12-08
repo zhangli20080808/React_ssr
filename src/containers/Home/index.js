@@ -5,6 +5,17 @@ import styles from './style.css'
 
 class Home extends Component {
 
+	componentWillMount() {
+		// 我们在做客户端渲染的时候 styles是由style-loader生成的 它里面是没有getcss的
+		// console.log(styles._getCss());
+		// console.log(this.props.staticContext) //服务端-对象  客户端-undefined 可以用来区分我们的环境 存进去
+		// if (styles._getCss) {
+		// 	console.log(styles._getCss());
+		// }
+		if(this.props.staticContext){
+			this.props.staticContext.css = styles._getCss()
+		}
+	}
 	getList() {
 		const { list } = this.props;
 		return list.map(item => <div key={item.id}>{item.title}</div>)
@@ -14,7 +25,7 @@ class Home extends Component {
 		return (
 			<div className={styles.test}>
 				{this.getList()}
-				<button onClick={()=>{alert('click1')}}>
+				<button onClick={() => { alert('click1') }}>
 					click
 				</button>
 			</div>
