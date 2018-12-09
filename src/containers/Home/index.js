@@ -1,25 +1,36 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { getHomeList } from './store/actions';
+import { Helmet } from 'react-helmet'
 import styles from './style.css'
 import withStyle from '../../withStyle'
 
 
 class Home extends Component {
 
-	getList() {	
+	getList() {
 		const { list } = this.props;
 		return list.map(item => <div key={item.id}>{item.title}</div>)
 	}
 
 	render() {
 		return (
-			<div className={styles.test}>
-				{this.getList()}
-				<button onClick={() => { alert('click1') }}>
-					click
+			<Fragment>
+				<Helmet>
+					<title>
+						home
+					</title>
+                    <meta name='descrption' content='公司归属感山沟沟'>
+					</meta>
+				</Helmet>
+				<div className={styles.test}>
+					{this.getList()}
+					<button onClick={() => { alert('click1') }}>
+						click
 				</button>
-			</div>
+				</div>
+			</Fragment>
+
 		)
 	}
 
@@ -39,7 +50,7 @@ const mapDispatchToProps = dispatch => ({
 	}
 })
 
-const ExportHome = connect(mapStateToProps, mapDispatchToProps)(withStyle(Home,styles));
+const ExportHome = connect(mapStateToProps, mapDispatchToProps)(withStyle(Home, styles));
 
 
 ExportHome.loadData = (store) => {
