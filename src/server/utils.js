@@ -17,7 +17,6 @@ export const render = (store, routes, req,context) => {
 		));
 		
 		const cssStr = context.css.length ? context.css.join('\n') :''
-console.log(cssStr)
 		return `
 			<html>
 				<head>

@@ -2,20 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getHomeList } from './store/actions';
 import styles from './style.css'
+import withStyle from '../../withStyle'
+
 
 class Home extends Component {
 
-	componentWillMount() {
-		// 我们在做客户端渲染的时候 styles是由style-loader生成的 它里面是没有getcss的
-		// console.log(styles._getCss());
-		// console.log(this.props.staticContext) //服务端-对象  客户端-undefined 可以用来区分我们的环境 存进去
-		// if (styles._getCss) {
-		// 	console.log(styles._getCss());
-		// }
-		if(this.props.staticContext){
-			this.props.staticContext.css.push(styles._getCss()) 
-		}
-	}
 	getList() {	
 		const { list } = this.props;
 		return list.map(item => <div key={item.id}>{item.title}</div>)
@@ -48,7 +39,7 @@ const mapDispatchToProps = dispatch => ({
 	}
 })
 
-const ExportHome = connect(mapStateToProps, mapDispatchToProps)(Home);
+const ExportHome = connect(mapStateToProps, mapDispatchToProps)(withStyle(Home,styles));
 
 
 ExportHome.loadData = (store) => {
