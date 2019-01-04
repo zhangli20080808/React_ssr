@@ -16,6 +16,8 @@ app.use(express.static('public'));
 
 app.use('/api', proxy('http://47.95.113.63', {
 	proxyReqPathResolver: function (req) {
+		console.log(req.url);
+		
 		return '/ssr/api' + req.url;
 	}
 }));
